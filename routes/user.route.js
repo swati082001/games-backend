@@ -47,4 +47,33 @@ UserRouter.post("/register",async(req,res)=>{
 })
 
 
+UserRouter.post("/login",async(req,res)=>{
+    const payload = req.body;
+    // console.log(req)
+    try {
+         const existing = await UserModel.find(payload)
+         console.log(existing);
+        if(existing.length > 0){
+            res.send({
+                "msg":"Player Found",
+                "data":existing,
+                
+            })
+        }
+        else{
+            
+            res.send({
+                "msg":"Player Not Found, Please register" ,             
+            })
+        }
+        
+               
+    } catch (error) {
+        res.send({
+            "msg":error.message
+        })
+    }
+})
+
+
 module.exports = {UserRouter}
