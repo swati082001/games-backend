@@ -4,7 +4,7 @@ const UserRouter = express.Router()
 
 UserRouter.get("/",async(req,res)=>{
     try {
-       const data = await UserModel.find()
+       const data = await UserModel.find().sort({score:-1})
        res.send(data)
         
     } catch (error) {
